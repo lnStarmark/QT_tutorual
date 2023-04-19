@@ -1,2 +1,2 @@
-# QT_tutorual
+# QT_tutorial
 Tutorial design QT application
