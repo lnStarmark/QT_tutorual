@@ -42,24 +42,51 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("QT_tutorial")
-        button = QPushButton("Press Me!")
-        button.setCheckable(True)
-        button.clicked.connect(self.the_button_was_clicked)
-        button.clicked.connect(self.the_button_was_toggled)
+
+        self.button_is_checked = True
+
+        self.button = QPushButton("Press Me!")
+        self.button.setCheckable(True)
+        '''
+        self.button.clicked.connect(self.the_button_was_clicked)
+        self.button.clicked.connect(self.the_button_was_toggled)
+        '''
+        # В Released нет сигнала, которым отправляется текущее сосояние
+        # checked, поэтому проверяем состояние checked («Нажата») в
+        # нажатом обработчике the_button_was_released()
+
+        self.button.released.connect(self.the_button_was_released)
+        self.button.setChecked(self.button_is_checked)
 
         # Размеры
         # self.setFixedSize(QSize(400, 300))
         self.setMinimumSize(400, 300)
         self.setMaximumSize(800, 600)
         # Устанавливаем центральный виджет Window.
-        self.setCentralWidget(button)
+        self.setCentralWidget(self.button)
 
     def the_button_was_clicked(self):
         print("Clicked!")
 
     def the_button_was_toggled(self, checked):
-        print("Checked?", checked)
+        self.button_is_checked = checked
+        print("Checked?", self.button_is_checked)
+
+        if(self.button_is_checked):
+            self.setFixedSize(QSize(400, 300))
+        else:
+            self.setFixedSize(QSize(800, 600))
+
+    def the_button_was_released(self):
+        self.button_is_checked = self.button.isChecked()
+        print(self.button_is_checked)
+
+
 def main():
+
+    print()
+
+    selfdoc()
 
     strc.zagolovok("Первая работа: Основная структура приложения QT")
 
