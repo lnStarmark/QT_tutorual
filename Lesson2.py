@@ -36,7 +36,8 @@ class MainWindow(QMainWindow):
 
         self.setWindowTitle("QT_tutorial")
 
-        self.label = QLabel("Click in this window")
+        #self.label = QLabel("Click in this window")
+        self.label = QLabel('<i>Click</i>, <b>in this</b>!!! <s><b>window</b></s>', self)
 
         # Сигнал от виджета inpt напрямую подкл к слоту виджета label
         # т.к. в label есть встренный слот setText
