@@ -12,6 +12,25 @@ class Example(QWidget):
     def __init__(self):
         super().__init__()
 
+        width =90
+        height=60
+
+        #--- Используем в drawBrushes(self, qp)
+        self.brush_patterns = [[Qt.SolidPattern, 10, 15, width, height],
+                               [Qt.Dense1Pattern, 130, 15, width, height],
+                               [Qt.Dense2Pattern, 250, 15, width, height],
+
+                               #[Qt.Dense3Pattern, 10, 105, width, height],
+
+                               [Qt.DiagCrossPattern, 10, 105, width, height],
+                               [Qt.Dense5Pattern, 130, 105, width, height],
+                               [Qt.Dense6Pattern, 250, 105, width, height],
+
+                               [Qt.HorPattern, 10, 195, width, height],
+                               [Qt.VerPattern, 130, 195, width, height],
+                               [Qt.BDiagPattern, 250, 195, width, height]
+                              ]
+
         self.initUI()
 
 
@@ -30,8 +49,16 @@ class Example(QWidget):
         qp.end()
 
 
+
     def drawBrushes(self, qp):
 
+        for exempl in self.brush_patterns:
+            brush = QBrush(exempl[0])
+            qp.setBrush(brush)
+            qp.drawRect(exempl[1],exempl[2],exempl[3],exempl[4])
+
+        #--- Перелопатить сие безобразие:
+        """
         brush = QBrush(Qt.SolidPattern)
         qp.setBrush(brush)
         qp.drawRect(10, 15, 90, 60)
@@ -71,7 +98,7 @@ class Example(QWidget):
         brush.setStyle(Qt.BDiagPattern)
         qp.setBrush(brush)
         qp.drawRect(250, 195, 90, 60)
-
+        """
 
 if __name__ == '__main__':
 
